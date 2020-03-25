@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Evolent_HealthModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Evolent_HealthModelStoreContainer">
+    <EntitySet Name="Status" EntityType="Evolent_HealthModel.Store.Status" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Student" EntityType="Evolent_HealthModel.Store.Student" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Student__Status__15502E78" Association="Evolent_HealthModel.Store.FK__Student__Status__15502E78">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="10" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <Association Name="FK__Student__Status__15502E78">
+    <End Role="Status" Type="Evolent_HealthModel.Store.Status" Multiplicity="0..1" />
+    <End Role="Student" Type="Evolent_HealthModel.Store.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
